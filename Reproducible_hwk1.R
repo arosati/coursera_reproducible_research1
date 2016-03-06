@@ -15,24 +15,20 @@ summary(data)
 # Histogram of the total number of steps taken each day
 library(ggplot2)
 library(dplyr)
-
+library(knitr)
 stepsByDay <- tapply(rep$steps, rep$date, sum, na.rm=TRUE)
 barplot(stepsByDay)
 
 #Mean number of steps taken each day
-mean <-ggplot(data = data, aes(dates, steps)) +
-    stat_summary(fun.y = mean, geom = "bar")
-mean+ggtitle("Mean Steps per Day")
+ggplot(data, aes(dates, steps)) + 
+    stat_summary(fun.y = mean, geom = "bar") +
+    ggtitle("Mean Steps Per Day")
 
 
 #Mean and Median number of steps taken each day
-median(rep$steps, na.rm=TRUE)
-# median of intervals answer = 0
-mean(rep$steps, na.rm=TRUE)
-# mean of intervals answer = 37.3826
-meanByDay<-mean(stepsByDay)
+mean(stepsByDay)
 # answer = 9354.23
-medianByDay<-median(stepsByDay)
+median(stepsByDay)
 # answer = 10395
 
 #Time series plot of the average number of steps taken
